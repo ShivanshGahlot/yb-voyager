@@ -22,6 +22,7 @@ jobs:
           go-version: 1.19
 
       - name: Build Binary
+        run: pwd
         run: go build -o yb-voyager/yb-voyager ./yb-voyager
 
       - name: Create Release
