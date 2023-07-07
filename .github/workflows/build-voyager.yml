@@ -23,21 +23,11 @@ jobs:
           cd yb-voyager
           go build
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Publish to the release
+        run: |
+          RELEASE_NAME=$(basename ${{ github.ref }})
+          gh release upload ${RELEASE_NAME} ./yb-voyager/yb-voyager --clobber
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Binary
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./yb-voyager/yb-voyager
-          asset_name: yb-voyager
-          asset_content_type: application/octet-stream
+          GITHUB_TOKEN: ${{ github.token }}
+        
+        
