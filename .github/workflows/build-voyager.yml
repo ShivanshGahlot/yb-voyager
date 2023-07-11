@@ -30,8 +30,8 @@ jobs:
           pwd
           ls
           ls ./yb-voyager
-          gh release upload yb-voyager/${RELEASE_NAME} ./yb-voyager --clobber
+          gh release upload yb-voyager/"${RELEASE_NAME}" --clobber ./yb-voyager/yb-voyager
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         
