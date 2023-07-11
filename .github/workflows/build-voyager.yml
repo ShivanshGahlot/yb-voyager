@@ -9,6 +9,11 @@ jobs:
   build:
     name: Build Binary
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      security-events: write
+      statuses: write
 
     steps:
       - uses: actions/checkout@v3
@@ -41,5 +46,4 @@ jobs:
           repo_token: ${{ github.token }}
           tag_name: ${{ github.ref }}
           overwrite: true
-        
         
