@@ -20,7 +20,8 @@ jobs:
 
       - name: Build Binary
         run: |
-          go build -o yb-voyager ./yb-voyager/main.go
+          cd yb-voyager
+          go build
 
       # - name: Publish to the release
       #   run: |
@@ -36,7 +37,7 @@ jobs:
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: yb-voyager
+          files: ./yb-voyager/yb-voyager
           repo_token: ${{ github.token }}
           tag_name: ${{ github.ref }}
           overwrite: true
