@@ -36,8 +36,8 @@ jobs:
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: my-binary
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          files: yb-voyager
+          repo_token: ${{ github.token }}
           tag_name: ${{ github.ref }}
           overwrite: true
         
