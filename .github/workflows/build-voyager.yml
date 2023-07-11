@@ -29,7 +29,10 @@ jobs:
           echo "RELEASE_NAME=${RELEASE_NAME}"
           pwd
           ls
-          ls ./yb-voyager
-          gh release upload yb-voyager/"${RELEASE_NAME}" --clobber ./yb-voyager/yb-voyager
+          ls -l ./yb-voyager
+          cd yb-voyager
+          gh release upload yb-voyager/"${RELEASE_NAME}" --clobber yb-voyager
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         
