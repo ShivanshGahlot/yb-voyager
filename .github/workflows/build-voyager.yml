@@ -32,6 +32,6 @@ jobs:
           ls ./yb-voyager
           gh release upload yb-voyager/"${RELEASE_NAME}" --clobber ./yb-voyager/yb-voyager
         env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         
