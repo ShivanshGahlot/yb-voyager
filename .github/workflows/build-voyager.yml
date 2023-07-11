@@ -33,5 +33,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ./yb-voyager/yb-voyager-${{ matrix.os }}
-          tag_name: ${{ github.ref }}
+          repo_token: ${{ github.token }}
+          overwrite: true
         
