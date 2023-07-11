@@ -35,6 +35,5 @@ jobs:
         with:
           files: ./yb-voyager/yb-voyager-${{ matrix.os }}
           repo_token: ${{ github.token }}
-          tag_name: ${{ github.ref }}
           overwrite: true
         
