@@ -28,11 +28,13 @@ jobs:
         run: |
           cd yb-voyager
           go build -o yb-voyager-${{ matrix.os }} .
+          echo ${{ github.ref }}
 
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
         with:
           files: ./yb-voyager/yb-voyager-${{ matrix.os }}
           repo_token: ${{ github.token }}
+          tag_name: ${{ github.ref }}
           overwrite: true
         
