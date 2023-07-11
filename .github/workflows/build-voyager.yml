@@ -11,10 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      packages: write
-      security-events: write
-      statuses: write
-
+      
     steps:
       - uses: actions/checkout@v3
 
@@ -28,17 +25,6 @@ jobs:
           cd yb-voyager
           go build
 
-      # - name: Publish to the release
-      #   run: |
-      #     RELEASE_NAME=$(basename ${{ github.ref }})
-      #     echo "RELEASE_NAME=${RELEASE_NAME}"
-      #     pwd
-      #     ls
-      #     ls -l ./yb-voyager
-      #     cd yb-voyager
-      #     gh release upload yb-voyager/"${RELEASE_NAME}" --clobber yb-voyager
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
         with:
