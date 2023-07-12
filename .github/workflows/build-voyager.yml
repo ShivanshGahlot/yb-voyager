@@ -23,7 +23,7 @@ jobs:
       - name: Build Binary
         run: |
           cd yb-voyager
-          go get github.com/karalabe/xgo
+          go install src.techknowlogick.com/xgo@latest
           xgo --targets=linux/amd64,darwin/amd64,darwin/arm64 .
           ls -l
 
