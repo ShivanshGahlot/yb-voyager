@@ -20,14 +20,10 @@ jobs:
         with:
           go-version: "1.20"
 
-      - name: Setup xgo 
-        run: |
-          cd /tmp
-          go get github.com/karalabe/xgo
-
       - name: Build Binary
         run: |
           cd yb-voyager
+          go get github.com/karalabe/xgo
           xgo --targets=linux/amd64,darwin/amd64,darwin/arm64 .
           ls -l
 
