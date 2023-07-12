@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build on ubuntu 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     permissions:
       contents: write
 
@@ -23,9 +23,9 @@ jobs:
       - name: Build Binary
         run: |
           cd yb-voyager
-          go install src.techknowlogick.com/xgo@latest
-          xgo -out ./yb-voyager --targets=linux/amd64,darwin/amd64,darwin/arm64 .
-          ls -l
+          GOOS=linux GOARCH=amd64 go build -o yb-voyager-linux-amd64
+          GOOS=darwin GOARCH=amd64 go build -o yb-voyager-darwin-amd64
+          GOOS=darwin GOARCH=arm64 go build -o yb-voyager-darwin-arm64
 
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
