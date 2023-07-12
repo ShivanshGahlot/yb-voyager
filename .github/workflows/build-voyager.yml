@@ -7,15 +7,11 @@ on:
 
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build on ubuntu 
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest]
-
+      
     steps:
       - uses: actions/checkout@v3
 
@@ -27,13 +23,17 @@ jobs:
       - name: Build Binary
         run: |
           cd yb-voyager
-          go build -o yb-voyager-${{ matrix.os }} .
-          echo ${{ github.ref }}
+          GOOS=darwin GOARCH=amd64 go build -o yb-voyager-darwin-amd64 .
+          GOOS=linux GOARCH=amd64 go build -o yb-voyager-linux-amd64 .
+          GOOS=darwin GOARCH=arm64 go build -o yb-voyager-darwin-arm64 .
 
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./yb-voyager/yb-voyager-${{ matrix.os }}
+          files: |
+            ./yb-voyager/yb-voyager-darwin-amd64
+            ./yb-voyager/yb-voyager-linux-amd64
+            ./yb-voyager/yb-voyager-darwin-arm64
           repo_token: ${{ github.token }}
           overwrite: true
         
