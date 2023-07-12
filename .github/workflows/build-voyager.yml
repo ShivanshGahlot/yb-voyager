@@ -24,7 +24,7 @@ jobs:
         run: |
           cd yb-voyager
           go install src.techknowlogick.com/xgo@latest
-          xgo -out . --targets=linux/amd64,darwin/amd64,darwin/arm64 .
+          xgo -out ./yb-voyager --targets=linux/amd64,darwin/amd64,darwin/arm64 .
           ls -l
 
       - name: Upload Binary to Release
