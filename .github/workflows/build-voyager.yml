@@ -8,9 +8,13 @@ on:
 jobs:
   build:
     name: Build on ubuntu 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: write
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v3
@@ -23,13 +27,23 @@ jobs:
       - name: Build Binary
         run: |
           cd yb-voyager
-          CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o voyager-darwin-arm64
+          if [ ${{ matrix.os }} == "ubuntu-latest" ]; then
+            CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o voyager-linux-amd64
+            CGO_ENABLED=1 GOOS=linux GOARCH=arm64 go build -o voyager-linux-arm64
+          elif [ ${{ matrix.os }} == "macos-latest" ]; then
+            CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o voyager-darwin-amd64
+            CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o voyager-darwin-arm64
+          fi
+
           ls -l
 
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
+            ./yb-voyager/voyager-linux-*amd64
+            ./yb-voyager/voyager-linux-*arm64
+            ./yb-voyager/voyager-darwin-*amd64
             ./yb-voyager/voyager-darwin-*arm64
           repo_token: ${{ github.token }}
           overwrite: true
