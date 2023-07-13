@@ -31,16 +31,16 @@ jobs:
             GOOS=linux GOARCH=amd64 go build -o voyager-linux-amd64-${{ github.ref }}
           elif [ ${{ matrix.os }} == "macos-latest" ]; then
             CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o voyager-darwin-amd64-${{ github.ref }}
-            CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o voyager-darwin-arm64
+            CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o voyager-darwin-arm64-${{ github.ref }}
           fi
 
       - name: Upload Binary to Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./yb-voyager/voyager-linux-*amd64
-            ./yb-voyager/voyager-darwin-*amd64
-            ./yb-voyager/voyager-darwin-*arm64
+            ./yb-voyager/voyager-linux-*amd64-${{ github.ref }}
+            ./yb-voyager/voyager-darwin-*amd64-${{ github.ref }}
+            ./yb-voyager/voyager-darwin-*arm64-${{ github.ref }}
           repo_token: ${{ github.token }}
           overwrite: true
         
