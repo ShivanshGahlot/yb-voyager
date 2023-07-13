@@ -30,9 +30,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./yb-voyager/main-darwin-*amd64
-            ./yb-voyager/main-linux-*amd64
-            ./yb-voyager/main-darwin-*arm64
+            ./yb-voyager/voyager-darwin-*arm64
           repo_token: ${{ github.token }}
           overwrite: true
         
