@@ -1,4 +1,4 @@
-name: Create Release
+name: Create yb-voyager binary
 
 on:
   create:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build on ubuntu 
+    name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
