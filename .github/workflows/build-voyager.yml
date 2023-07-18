@@ -37,20 +37,19 @@ jobs:
       - name: Archive the files
         run: |
           cd yb-voyager
-          cp ./src/srcdb/data/sample-ora2pg.conf ./yb-voyager
           if [ ${{ matrix.os }} == "ubuntu-latest" ]; then
             mkdir voyager-linux-amd64-package
             mv voyager-linux-amd64 voyager-linux-amd64-package
-            mv sample-ora2pg.conf voyager-linux-amd64-package/base-ora2pg.conf
+            cp ./src/srcdb/data/sample-ora2pg.conf voyager-linux-amd64-package/base-ora2pg.conf
             tar -czvf voyager-linux-amd64.tar.gz voyager-linux-amd64-package
           elif [ ${{ matrix.os }} == "macos-latest" ]; then
             mkdir voyager-darwin-amd64-package
             mv voyager-darwin-amd64 voyager-darwin-amd64-package
-            mv sample-ora2pg.conf voyager-darwin-amd64-package/base-ora2pg.conf
+            cp ./src/srcdb/data/sample-ora2pg.conf voyager-darwin-amd64-package/base-ora2pg.conf
             tar -czvf voyager-darwin-amd64.tar.gz voyager-darwin-amd64-package
             mkdir voyager-darwin-arm64-package
             mv voyager-darwin-arm64 voyager-darwin-arm64-package
-            mv sample-ora2pg.conf voyager-darwin-arm64-package/base-ora2pg.conf
+            cp ./src/srcdb/data/sample-ora2pg.conf voyager-darwin-arm64-package/base-ora2pg.conf
             tar -czvf voyager-darwin-arm64.tar.gz voyager-darwin-arm64-package
           fi
 
