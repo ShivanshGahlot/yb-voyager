@@ -37,7 +37,6 @@ jobs:
       - name: Archive the files
         run: |
           cd yb-voyager
-          cp ./src/srcdb/data/sample-ora2pg.conf
           if [ ${{ matrix.os }} == "ubuntu-latest" ]; then
             mkdir voyager-linux-amd64-package
             mv voyager-linux-amd64 voyager-linux-amd64-package
